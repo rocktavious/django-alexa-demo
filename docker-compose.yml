@@ -1,0 +1,35 @@
+base:
+  build: .
+  dockerfile: ./alexa.dockerfile
+  volumes:
+  - $PWD/src:/src
+
+# SERVICES
+alexa:
+  extends:
+    file: docker-compose.yml
+    service: base
+  command: django-admin runserver 0.0.0.0:8000
+  ports:
+  - "8000:8000"
+
+# TESTS
+unittest:
+  extends:
+    file: docker-compose.yml
+    service: base
+  command: py.test -v --capture=sys --ds=alexa.core.settings --cov-report term --cov alexa ./alexa_tests
+
+pep8:
+  extends:
+    file: docker-compose.yml
+    service: base
+  command: flake8 alexa/
+
+smoketest:
+  extends:
+    file: docker-compose.yml
+    service: base
+  command: python /src/alexa_tests/smoketest.py
+  links:
+  - base:server

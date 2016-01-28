@@ -1,0 +1,14 @@
+
+{% extends "rest_framework/base.html" %}
+{% load static from staticfiles %}
+
+{% block title %}Alexa | API{% endblock %}
+
+{% block branding %}
+  <a class='navbar-brand' href='{% url 'rest_framework:django.swagger.base.view' %}'>Alexa</a>
+{% endblock %}
+
+{% block description %}
+  <div class="alert alert-info" role="alert"><strong>Heads up!</strong> This API is a preview release and will see significant change in coming updates. Official versioning will begin with v1.</div>
+  {{ description }}
+{% endblock %}
