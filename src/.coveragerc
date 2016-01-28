@@ -1,5 +1,0 @@
-[html]
-directory=/out/htmlcov
-
-[xml]
-output=/out/coverage.xml
